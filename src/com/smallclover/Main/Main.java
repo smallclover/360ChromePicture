@@ -23,8 +23,8 @@ public class Main {
     public static final String DEFAULT_STOREPATH = System.getProperty("user.home") + "\\Desktop\\pic";//用户主目录，程序在哪里执行，哪里就是主目录
     public static String filePath;//缓存目录
     public static String storePath;//指定的存储位置
-    private static int bigPicNumber = 0;
-    private static int smallPicNumber = 0;
+    private static int bigPicNumber = 0;//壁纸原图
+    private static int smallPicNumber = 0;//壁纸缩略图
 
     private static void modifiedPictureType(String picName){
     }
@@ -66,6 +66,7 @@ public class Main {
         }
         else{
             File[] t = path.listFiles();
+            System.out.println("壁纸总数： " + t.length);
             for(int i=0;i<t.length;i++){
                 //判断文件列表中的对象是否为文件夹对象，如果是则执行tree递归，直到把此文件夹中所有文件输出为止
                 if(t[i].isDirectory()){
@@ -104,19 +105,14 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-/*        File path_1 = new File(filePath);
-        getFileList(path_1);
-        System.out.println("大图数量：" + bigPicNumber);
-        System.out.println("缩略图数量：" + smallPicNumber);*/
 
         Scanner sc = new Scanner(System.in);
         createMkdirs(sc.nextLine(), sc.nextLine());
 
- /*       Map<String, String> env = System.getenv();
-        System.out.println(env.get("USERNAME"));
-        System.out.println(env.get("COMPUTERNAME"));
-        System.out.println(env.get("USERDOMAIN"));
-        System.out.println("用户的主目录:"+System.getProperty("user.home"));
-        System.out.println("用户的当前工作目录:"+System.getProperty("user.dir"));*/
+        File path_1 = new File(filePath);
+        getFileList(path_1);
+        System.out.println("大图数量：" + bigPicNumber);
+        System.out.println("缩略图数量：" + smallPicNumber);
+        System.out.println("壁纸导出完成");
     }
 }
