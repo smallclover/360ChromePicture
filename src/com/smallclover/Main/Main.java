@@ -110,7 +110,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-
+        System.out.println("请输入360缓存图片地址&指定导出图片的存储位置：");
         Scanner sc = new Scanner(System.in);
         createMkdirs(sc.nextLine(), sc.nextLine());
 
