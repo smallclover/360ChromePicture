@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="360ChromePicture:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/360ChromePicture_jar</output-path>
+    <root id="root">
+      <element id="archive" name="360ChromePicture.jar">
+        <element id="module-output" name="360ChromePicture" />
+      </element>
+    </root>
+  </artifact>
+</component>
