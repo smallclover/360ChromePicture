@@ -1,5 +1,7 @@
 package com.smallclover.Main;
 
+import com.smallclover.db.DbCURD;
+import com.smallclover.utils.FileKit;
 import com.smallclover.utils.StrKit;
 
 import java.io.*;
@@ -40,13 +42,17 @@ public class Main {
             System.out.println("缓存目录不可以为空");
         }
         if(StrKit.isBlank(storePath_1)){
-            System.out.println("指定的存储目录为空，将使用默认的存储目录，存储位置为程序运行的目录的pic文件下");
+            System.out.println("指定的存储目录为空，将使用默认的存储目录，存储位置默认为pic文件下");
             storePath = DEFAULT_STOREPATH;
         }else {
             storePath = storePath_1;
         }
         filePath = filePath_1;
         File file = new File(storePath);
+        if(file.exists()){
+            System.out.println("目录已经存在");
+            return true;
+        }
         if (file.mkdir()){
             System.out.println("目录创建成功");
             return true;
@@ -68,6 +74,9 @@ public class Main {
             File[] t = path.listFiles();
             System.out.println("壁纸总数： " + t.length);
             for(int i=0;i<t.length;i++){
+/*                System.out.println("========"+i+"========");
+                FileKit.getPictureInfo(t[i]);
+                System.out.println("=====================");*/
                 //判断文件列表中的对象是否为文件夹对象，如果是则执行tree递归，直到把此文件夹中所有文件输出为止
                 if(t[i].isDirectory()){
                     System.out.println("目录： " + t[i].getName());
@@ -76,6 +85,10 @@ public class Main {
                 else{
                     //后缀为x的是缩略图
                     if(t[i].getName().charAt(t[i].getName().length() - 1) != 'x'){
+                        if(DbCURD.queryByName(t[i].getName())){//说明文件已经存在跳过此次复制
+                            System.out.println("文件： " + t[i].getName() + " 已经存在，不进行复制");
+                            continue;
+                        }
                         copyFileAndRename(t[i].getName(), bigPicNumber ++);
                         System.out.println("文件： "+t[i].getName());
                     }else{
@@ -84,6 +97,7 @@ public class Main {
                     }
                 }
             }
+            DbCURD.close();
         }
     }
 
