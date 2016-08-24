@@ -116,6 +116,8 @@ public class Main {
             output.write(in);
             in = input.read();
         }
+
+        DbCURD.addPicture(fileName);
     }
 
     /**

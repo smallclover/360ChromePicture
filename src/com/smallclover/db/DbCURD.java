@@ -59,6 +59,14 @@ public class DbCURD {
         return  false;
     }
 
+    public static void addPicture(String name){
+        try {
+            statement.executeUpdate("insert into picture(name) values('"+name+"')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 //        System.out.println(System.getProperty("user.home"));
 
